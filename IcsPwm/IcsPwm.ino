@@ -5,8 +5,6 @@
 #include <Servo.h>
 #include <EEPROM.h>
 #include "config.h"
-#include "iodefine.h"
-#include "iodefine_ext.h"
 
 // debug serial print
 #ifdef DEBUG_SERIAL
@@ -62,23 +60,13 @@ static uint8_t s_rxData[3];
 static int s_rxDataSize;
 static int s_rxDataCnt;
 
-extern unsigned short debug_regval1;
-extern unsigned short debug_regval2;
-extern unsigned short debug_regval3;
-
 // setup
 void setup()
 {
     // serial port for debug
-    Serial.begin(115200);
+    DEBUG_SERIAL.begin(115200);
     // serial port for ICS bus
-    ICS_SERIAL.begin(ICS_BAUD, SERIAL_8E1); // TODO
-    Serial.println(SERIAL_8E1, HEX);
-    Serial.println(debug_regval1, HEX);
-    Serial.println(debug_regval2, HEX);
-    Serial.println(debug_regval3, HEX);
-    Serial.println(SCR02.scr02, HEX);
-    //Serial.println(SCR03.scr03, HEX);
+    ICS_SERIAL.begin(ICS_BAUD, SERIAL_8E1);
 #if defined(__RL78__) || defined(__RX__)
     pinMode(PIN_ICS_TX, OUTPUT_OPENDRAIN);
 #endif
@@ -105,7 +93,6 @@ void setup()
         // s_servos[i].attach(PIN_SERVOS[i]);
         // s_servos[i].write(90);
     }
-    Serial.println("Hello!");
 }
 
 // set position
@@ -117,13 +104,6 @@ bool cmd_position()
     uint16_t pos = ((uint16_t)(s_rxData[0] & 0x7F) << 7) |
                     (uint16_t)(s_rxData[1] & 0x7F);
                     
-    DEBUG_SERIAL.print("cmd_position ");                
-    DEBUG_SERIAL.print(s_rxCommand, HEX);                
-    DEBUG_SERIAL.print(" : ");                
-    DEBUG_SERIAL.print(id_sub, HEX);                
-    DEBUG_SERIAL.print(" : ");                
-    DEBUG_SERIAL.println(pos);                
-    
     // turn on servo
     if( (!s_servoEnable[id_sub]) && (pos != 0)){
         s_servoEnable[id_sub] = true;
@@ -164,7 +144,6 @@ bool cmd_position()
 // read / write ID
 bool cmd_id()
 {
-    Serial.println("cmd_id");
     bool wait_response = false;
     
     // read
@@ -172,11 +151,8 @@ bool cmd_id()
        (s_rxData[1] == SC_READ_ID) &&
        (s_rxData[2] == SC_READ_ID))
     {
-        Serial.println("read");
         uint8_t response = CMD_ID | s_ID;
         ICS_SERIAL.write(response);
-        Serial.println(response, HEX);
-        Serial.println(s_ID, HEX);
         wait_response = true;
     }
     // write
@@ -184,12 +160,9 @@ bool cmd_id()
             (s_rxData[1] == SC_WRITE_ID) &&
             (s_rxData[2] == SC_WRITE_ID))
     {
-        Serial.println("write");
         ICS_SERIAL.write(s_rxCommand);
         s_ID = s_rxID & ID_GRP_MASK;
         EEPROM.write(2, s_ID);
-        Serial.println(s_rxCommand, HEX);
-        Serial.println(s_ID, HEX);
         wait_response = true;
     }
     
@@ -218,11 +191,8 @@ bool checkReceivedCommand(uint8_t c)
     s_rxID         = c & ID_MASK;
     uint8_t id_grp = c & ID_GRP_MASK;
     
-    DEBUG_SERIAL.print("c=");DEBUG_SERIAL.println(c, HEX);
-    
     // for me?
     if((s_rxCommand != CMD_ID) && (id_grp != s_ID)){
-        DEBUG_SERIAL.println("NOT for me");
         return false;
     }
     
@@ -278,9 +248,6 @@ void loop()
     // receiving data
     while(ICS_SERIAL.available() > 0){
         uint8_t c = ICS_SERIAL.read();
-        //Serial.print("[");
-        //Serial.print(c, HEX); 
-        //Serial.print("]");
         switch(s_rxState){
             // wait for ICS command
             case STATE_WAIT_COMMAND:
