@@ -1,6 +1,6 @@
 # ICS bus to PWM servo Adapter
 
-This adapter let you connect PWM servos such as SG90 to KONDO ICS serial servo bus.
+This adapter let you connect PWM servos to KONDO ICS serial servo bus.
 
 A adapter can controls up to 4 PWM servos.
 
@@ -28,7 +28,7 @@ The parameter of **Set Position** is interpreted as the following.
 
 The ID of a adapter must be a multiples of 4, and the adapter has 4 offset IDs (+0 to +3).
 
-For example, consider the adapter which ID is 8. The servos connected to this addapter are assinged ID 8, 9, 10 and 11.
+For example, consider the adapter which ID is 8. The ID of servos connected to this addapter are 8, 9, 10 and 11.
 
 ## Hardware
 The hardware of this adapter is made of GR-KURUMI. GR-KURUMI is Arduino based MCU board (Renesas RL78/G13).
@@ -59,4 +59,6 @@ The software of this adapter is Arduino based.
 | `PIN_SERVO_0` - `PIN_SERVO_7` | PWM output pins | `3`, `5`, `6`, `9`| 
 
 ## Movie
+
+[![](https://img.youtube.com/vi/fqwMWizwraA/0.jpg)](https://www.youtube.com/watch?v=fqwMWizwraA)
 
