@@ -14,7 +14,7 @@ void setup() {
       servos[id].attach(ICS, id);
   }
   for(int id=0; id<8; id++){
-      servos[id].setPosition(90);
+      servos[id].setPosition(7500);
   }
   
   pinMode(3, INPUT_PULLUP);
@@ -33,7 +33,7 @@ void loop() {
   swOld = sw;
   
   int volume = analogRead(A0);
-  int position = map(volume, 0, 4095, 0, 180);
+  int position = map(volume, 0, 4095, 3500, 11500);
   
   servos[servoSel].setPosition(position);
   delay(20);

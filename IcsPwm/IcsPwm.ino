@@ -116,18 +116,14 @@ bool cmd_position()
         digitalWrite(PIN_SERVOS[id_sub], LOW); // TODO
     }
     
-    // pos = 0 - 180 [deg]
-    if(pos < 180){
-        s_servos[id_sub].write(pos);
-    }
     // pos = 500 - 2500 [usec]
     else if((500 <= pos) && (pos <= 2500)){
         s_servos[id_sub].writeMicroseconds(pos);
     }
-    // pos = 7500 - 11500 [ICS compatible position]
-    else if((7500 <= pos) && (pos <= 11500)){
+    // pos = 3500 - 11500 [ICS compatible position]
+    else if((3500 <= pos) && (pos <= 11500)){
         // 7500 - 11500 => 544 - 2400 [usec]
-        int usec = map(pos, 7500, 11500, 544, 2400);
+        int usec = map(pos, 3500, 11500, 544, 2400);
         s_servos[id_sub].writeMicroseconds(usec);
     }
     

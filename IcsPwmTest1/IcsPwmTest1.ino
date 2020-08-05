@@ -12,7 +12,7 @@ void setup() {
       servos[id].attach(ICS, id);
   }
   for(int id=0; id<8; id++){
-      servos[id].setPosition(90);
+      servos[id].setPosition(7500);
   }
   
   delay(1000);
@@ -23,15 +23,15 @@ void loop() {
   int position;
   
   for(int id=0; id<8; id++){
-    for(int position=90; position>=0; position-=2){
+    for(int position=7500; position>=3500; position-=100){
       servos[id].setPosition(position);
       delay(20);
     }
-    for(int position=0; position<=180; position+=2){
+    for(int position=3500; position<=11500; position+=100){
       servos[id].setPosition(position);
       delay(20);
     }
-    for(int position=180; position>=90; position-=2){
+    for(int position=11500; position>=7500; position-=100){
       servos[id].setPosition(position);
       delay(20);
     }
