@@ -20,8 +20,8 @@ The parameter of **Set Position** is interpreted as the following.
 | Value         | Operation    |
 |:--------------|:-------------|
 | 0             | Disables PWM output. |
-| 500 to 2500   | Executes Servo::writeMicroseconds(). |
-| 3500 to 11500 | ICS compatible position mode.<br>Converts (3500 - 11500) to (544 - 2400),<br>and executes Servo::writeMicroseconds(). |
+| 500 to 2500   | Executes `Servo::writeMicroseconds()`. |
+| 3500 to 11500 | ICS compatible position mode.<br>Converts (3500 - 11500) to (544 - 2400),<br>and executes `Servo::writeMicroseconds()`. |
 
 
 ### (2) Read / Write ID
