@@ -31,7 +31,7 @@ The ID of a adapter must be a multiples of 4, and the adapter has 4 offset IDs (
 For example, consider the adapter which ID is 8. The ID of servos connected to this addapter are 8, 9, 10 and 11.
 
 ## Hardware
-The hardware of this adapter is made of GR-KURUMI. GR-KURUMI is Arduino based MCU board (Renesas RL78/G13).
+The hardware of this adapter is made of GR-KURUMI. GR-KURUMI is Arduino based MCU boards (Renesas RL78/G13).
 
 ![Schematic](schematic.png)
 
@@ -44,6 +44,10 @@ The software of this adapter is Arduino based.
 - [IcsPwm](IcsPwm/) : The schetch of this adapter. It is for GR-KURUMI.
 - [IcsPwmTest1](IcsPwmTest1/) : A test code of ICS controller. It is for GR-ROSE.
 - [IcsPwmTest2](IcsPwmTest2/) : Another test code of ICS controller. It is also for GR-ROSE.
+
+`HardwareSerial::begin()` of GR-KURUMI is buggy. The following is a temporary bug fixed sources. The official bug fixed update is coming soon.
+
+- [Temporary bug fix](temp/)
 
 ## Configure
 
