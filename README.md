@@ -31,11 +31,11 @@ The ID of a adapter must be a multiples of 4, and the adapter has 4 offset IDs (
 For example, consider the adapter which ID is 8. The ID of servos connected to this addapter are 8, 9, 10 and 11.
 
 ## Hardware
-The hardware of this adapter is made of GR-KURUMI. GR-KURUMI is Arduino based MCU boards (Renesas RL78/G13).
+The hardware of this adapter is made of GR-KURUMI. GR-KURUMI is a kind of Aduino-based MCU board (Renesas RL78/G13).
 
 ![Schematic](schematic.png)
 
-You can also select another Arduino based MCU board such as Arduino Pro Mini. However, most of Arduino-based MCU board don't support open drain output of serial port. In that case, insert a diode between TxD and RxD.
+You can also select another Arduino-based MCU board such as Arduino Pro Mini. However, most of Arduino-based MCU boards don't support open drain output of serial port. In that case, insert a diode between TxD and RxD.
 
 ![Schematic](diode.png)
 
