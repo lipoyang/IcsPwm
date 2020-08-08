@@ -35,7 +35,7 @@ The hardware of this adapter is made of GR-KURUMI. GR-KURUMI is Arduino based MC
 
 ![Schematic](schematic.png)
 
-You can use another Arduino based MCU board such as Arduino Pro Mini. However, most of Arduino-based MCU board don't support open drain output of serial port. In that case, insert a diode between TxD and RxD.
+You can also select another Arduino based MCU board such as Arduino Pro Mini. However, most of Arduino-based MCU board don't support open drain output of serial port. In that case, insert a diode between TxD and RxD.
 
 ![Schematic](diode.png)
 
