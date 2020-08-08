@@ -63,8 +63,10 @@ static int s_rxDataCnt;
 // setup
 void setup()
 {
+#ifdef DEBUG_SERIAL
     // serial port for debug
     DEBUG_SERIAL.begin(115200);
+#endif
     // serial port for ICS bus
     ICS_SERIAL.begin(ICS_BAUD, SERIAL_8E1);
 #if defined(__RL78__) || defined(__RX__)
