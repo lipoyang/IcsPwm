@@ -129,7 +129,7 @@ bool cmd_position()
     
     // response
     uint8_t response[3];
-    response[0] = s_rxCommand & ~MSB_MASK;
+    response[0] = (s_rxCommand | s_rxID) & ~MSB_MASK;
     response[1] = s_rxData[0];
     response[2] = s_rxData[1];
     ICS_SERIAL.write(response, 3);
@@ -156,7 +156,7 @@ bool cmd_id()
             (s_rxData[1] == SC_WRITE_ID) &&
             (s_rxData[2] == SC_WRITE_ID))
     {
-        ICS_SERIAL.write(s_rxCommand);
+        ICS_SERIAL.write(s_rxCommand | s_rxID);
         s_ID = s_rxID & ID_GRP_MASK;
         EEPROM.write(2, s_ID);
         wait_response = true;
